@@ -1,0 +1,1 @@
+Simple package for referencing Quandl data sets.  Exposes self to the meteor environment.  Requires API keys.

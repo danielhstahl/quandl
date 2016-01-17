@@ -1,7 +1,8 @@
 // Write your package code here!
-quandlData=new Mongo.Collection("quandl");
-quandlData.ensureIndex({Date:1, DataSet:1}, {unique:true});
+
 Quandl=function(){
+    this.QuandlData=new Mongo.Collection("quandl");
+    this.QuandlData.rawCollection().ensureIndex({Date:1, DataSet:1}, {unique:true});
     var self=this;
     self.api_key="";
     self.url = "https://www.quandl.com/api/v3/datasets";

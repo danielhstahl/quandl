@@ -1,8 +1,8 @@
 // Write your package code here!
-QuandlDB=new Mongo.Collection("quandl");
-QuandlDB.rawCollection().ensureIndex({Date:1, DataSet:1}, {unique:true}, function(err){});
+
 Quandl=function(){
-    
+    this.QuandlDB=new Mongo.Collection("quandl");
+    this.QuandlDB.rawCollection().ensureIndex({Date:1, DataSet:1}, {unique:true}, function(err){});
     var self=this;
     self.api_key="";
     self.url = "https://www.quandl.com/api/v3/datasets";
@@ -23,9 +23,10 @@ Quandl=function(){
                 obj[column_names[j]]=data[i][j];
             }
             obj.DataSet=dataset;
-            quandlData.insert(obj);
+            //self.QuandlDB.insert(obj);
+            self.QuandlDB.update(obj[j], obj[j], {upsert:true});
         }
     }
 }
 quandl=new Quandl();
-console.log("quanld is now available");
+console.log("quandl is now available with data base name quandl.QuandlDB");
